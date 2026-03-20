@@ -75,9 +75,10 @@ The pipeline runs **sequentially** — each step builds on all prior outputs:
 1. **Read the persona prompt** from `prompts/0X_*.md` for the current step.
 2. **Adopt that persona completely** — use the role, goal, and backstory described.
 3. **Use web search** (steps 1-4 only) to gather real data.
-   - **Primary Search Method:** Use the Jina AI Search & Reader API via your terminal `run_command` tool. Use `curl -H 'Authorization: Bearer [USER_JINA_API_KEY]' 'https://s.jina.ai/[your-search-query]' > temp_search.md` to search the web, or `https://r.jina.ai/[url]` to read a specific page. This returns clean, LLM-friendly markdown.
-   - **Cleanup Requirement:** Once you have downloaded, read, and analyzed the temporary search result files (e.g., `temp_search.md`), **you MUST delete them** using the `run_command` tool (e.g., `rm temp_search.md`) to keep the workspace clean.
-   - **Fallback Method:** Jina's free tier has rate limits. If accessing a Jina URL returns an error, timeout, or rate-limit message, **immediately fall back** to using your standard `search_web` and `read_url_content` tools.
+   - **Primary Search Method:** Use your standard `search_web` tool to perform web searches and find relevant URLs. DO NOT use Jina for searching (`s.jina.ai` is forbidden).
+   - **Content Reading Method:** Once you have a URL you want to read, use the Jina AI Reader API via your terminal `run_command` tool to extract the content. Use `curl -H 'Authorization: Bearer [USER_JINA_API_KEY]' 'https://r.jina.ai/[url]' > temp_page.md`. This returns clean, LLM-friendly markdown.
+   - **Cleanup Requirement:** Once you have downloaded, read, and analyzed the temporary page files (e.g., `temp_page.md`), **you MUST delete them** using the `run_command` tool (e.g., `rm temp_page.md`) to keep the workspace clean.
+   - **Fallback Method:** Jina's free tier has rate limits. If reading a URL via Jina returns an error, timeout, or rate-limit message, **immediately fall back** to using your standard `read_url_content` tool.
 4. **Pass all prior step outputs as context** to the current step — this is critical for pipeline coherence.
 5. **Write output** in the requested language using the structure defined in each prompt.
 6. **Repeat** for each subsequent step.
