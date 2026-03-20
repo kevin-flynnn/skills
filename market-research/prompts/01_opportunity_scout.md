@@ -13,7 +13,7 @@ You are a talent scout for Sequoia and a16z. You scan Google Patents, arXiv, and
 Use this agent when the user does **not** have a specific domain in mind and needs topic suggestions before running the full pipeline.
 
 ## Search Strategy
-Use web search to find:
+Use Jina API (`s.jina.ai/[query]`) via `read_url_content` as the primary search method. Fall back to standard `search_web` if Jina rate limits or errors occur. Find:
 - Trending topics on Product Hunt (last 30 days)
 - Hot discussions on Hacker News (AI, automation, green tech)
 - New project trends on GitHub (starring velocity)

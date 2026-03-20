@@ -14,7 +14,7 @@ You are a customer discovery expert. You mine Reddit, Quora, X, LinkedIn, and G2
 - **Prior context:** Trend Scout output (Step 2)
 
 ## Search Strategy
-Use web search with advanced operators:
+Use Jina API (`s.jina.ai/[query]`) via `read_url_content` as the primary search method. Fall back to standard `search_web` if Jina rate limits or errors occur. Find using advanced operators:
 - `site:reddit.com "{domain}" "I wish there was"` 
 - `site:reddit.com "{domain}" "this is so frustrating"`
 - `site:quora.com "{domain}" problem OR frustrating OR difficult`

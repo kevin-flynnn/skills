@@ -14,7 +14,7 @@ You are a world-class technology and market trend analyst. You monitor specializ
 - **Prior context:** None (this is the first pipeline step)
 
 ## Search Strategy
-Use web search to find:
+Use Jina API (`s.jina.ai/[query]`) via `read_url_content` as the primary search method. Fall back to standard `search_web` if Jina rate limits or errors occur. Find:
 - `[domain] trends 2025 2026` on major tech publications
 - `site:a16z.com [domain]` for VC perspective
 - `site:mckinsey.com [domain] report` for consulting insights
